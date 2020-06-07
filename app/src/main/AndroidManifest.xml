@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.yanze.cloudreaderkotlin">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
+    <application
+        android:name=".App"
+        android:allowBackup="false"
+        android:icon="@drawable/ic_cloudreader"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:replace="android:allowBackup">
+        <activity android:name=".ui.mtime.FilmDetailActivity"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/MyScrollPage" />
+        <activity
+            android:name=".ui.movie.MovieDetailActivity"
+            android:theme="@style/MyScrollPage" />
+        <activity android:name=".ui.movie.MovieTopActivity" />
+        <activity
+            android:name=".view.webview.WebViewActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.viewbigimage.ViewBigImageActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ViewBigPicTheme" />
+        <activity
+            android:name=".ui.wan.article.ArticleListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.wan.CategoryDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.navi_menu.NavHomePageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.search.SearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.TransitionActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.navi_menu.ScanDownActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.navi_menu.IssueActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.navi_menu.AboutActivity"
+            android:screenOrientation="portrait" />
+    </application>
+
+</manifest>
