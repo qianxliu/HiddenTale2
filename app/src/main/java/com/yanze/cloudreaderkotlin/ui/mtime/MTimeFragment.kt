@@ -6,7 +6,6 @@ import com.google.android.material.tabs.TabLayout
 import com.yanze.cloudreaderkotlin.R
 import com.yanze.cloudreaderkotlin.adapter.MyFragmentPageAdapter
 import com.yanze.cloudreaderkotlin.base.BaseFragment
-import com.yanze.cloudreaderkotlin.test.TextFragment
 import kotlinx.android.synthetic.main.fragment_mtime.view.*
 
 class MTimeFragment : BaseFragment() {
@@ -45,7 +44,7 @@ class MTimeFragment : BaseFragment() {
         titlesList.add("热映榜")
         titlesList.add("即将上映")
         fragments.add(FilmShowingFragment.getInstance("热映榜"))
-        fragments.add(FilmComingFragment.getInstance("即将上映"))
+        fragments.add(FilmComingFragment.getInstance())
     }
 
     companion object {

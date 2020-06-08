@@ -2,6 +2,7 @@ package com.yanze.cloudreaderkotlin.base
 
 import android.graphics.Color
 import android.graphics.drawable.AnimationDrawable
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
@@ -15,7 +16,8 @@ import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.GlideDrawable
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.yanze.cloudreaderkotlin.R
@@ -30,7 +32,6 @@ import kotlinx.android.synthetic.main.activity_header_base.*
 import kotlinx.android.synthetic.main.activity_header_base.view.*
 import kotlinx.android.synthetic.main.base_header_title_bar.view.*
 import kotlinx.android.synthetic.main.layout_loading_view.view.*
-import java.lang.Exception
 
 abstract class BaseHeaderActivity : AppCompatActivity() {
 
@@ -40,10 +41,13 @@ abstract class BaseHeaderActivity : AppCompatActivity() {
 
     private lateinit var loadingView: View
     private lateinit var refreshView: View
+
     // 滑动多少距离后标题不透明
     private var slidingDistance: Int = 0
+
     // 这个是高斯图背景的高度
     private var imageBgHeight: Int = 0
+
     // 清除动画，防止内存泄漏
     private var changeBounds: CustomChangeBounds? = null
     private var mAnimationDrawable: AnimationDrawable? = null
@@ -54,7 +58,7 @@ abstract class BaseHeaderActivity : AppCompatActivity() {
     }
 
     override fun setContentView(layoutResID: Int) {
-    //        super.setContentView(layoutResID)
+        //        super.setContentView(layoutResID)
         //父布局
         val ll: View = layoutInflater.inflate(R.layout.activity_header_base, null)
 
@@ -269,16 +273,16 @@ abstract class BaseHeaderActivity : AppCompatActivity() {
             //高斯模糊背景
             Glide.with(this)
                     .load(imgUrl)
-                    .bitmapTransform(BlurTransformation(this, 23, 4))
-                    .listener(object : RequestListener<String, GlideDrawable> {
-                        override fun onException(e: Exception?, model: String?, target: Target<GlideDrawable>?, isFirstResource: Boolean): Boolean {
-                            return false
-                        }
-
-                        override fun onResourceReady(resource: GlideDrawable?, model: String?, target: Target<GlideDrawable>?, isFromMemoryCache: Boolean, isFirstResource: Boolean): Boolean {
+                    .transform(BlurTransformation(this, 23, 4))
+                    .listener(object : RequestListener<Drawable> {
+                        override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
                             mTitleView.tb_base_title.setBackgroundColor(Color.TRANSPARENT)
                             mTitleView.iv_base_titlebar_bg.imageAlpha = 0
                             mTitleView.iv_base_titlebar_bg.visibility = View.VISIBLE
+                            return false
+                        }
+
+                        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
                             return false
                         }
                     })

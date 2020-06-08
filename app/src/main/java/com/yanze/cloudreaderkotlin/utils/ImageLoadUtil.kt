@@ -2,6 +2,7 @@ package com.yanze.cloudreaderkotlin.utils
 
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.yanze.cloudreaderkotlin.R
 import jp.wasabeef.glide.transformations.BlurTransformation
 
@@ -15,8 +16,8 @@ class ImageLoadUtil {
         fun displayCircle(imageView: ImageView, imageUrl: String) {
             Glide.with(imageView.context)
                     .load(imageUrl)
-                    .crossFade(500)
-                    .transform(GlideCircleTransform(imageView.context))
+                    .transition(withCrossFade(500))
+                    .transform(GlideCircleTransform())
                     .error(R.drawable.ic_avatar_default)
                     .into(imageView)
         }
@@ -27,7 +28,7 @@ class ImageLoadUtil {
         fun showMovieImg(image: ImageView, url: String) {
             Glide.with(image.context)
                     .load(url)
-                    .crossFade(500)
+                    .transition(withCrossFade(500))
                     .override(CommonUtils.getDimens(R.dimen.movie_detail_width).toInt()
                             , CommonUtils.getDimens(R.dimen.movie_detail_height).toInt())
                     .placeholder(getDefaultPic(0))
@@ -43,7 +44,7 @@ class ImageLoadUtil {
                     .load(imgResource)
                     .placeholder(getMusicDefaultPic(3))
                     .error(getMusicDefaultPic(3))
-                    .crossFade(500)
+                    .transition(withCrossFade(500))
                     .into(iv)
         }
 
@@ -54,7 +55,7 @@ class ImageLoadUtil {
         fun showPersonImg(imageView: ImageView, url: String) {
             Glide.with(imageView.context)
                     .load(url)
-                    .crossFade(500)
+                    .transition(withCrossFade(500))
                     .error(getDefaultPic(0))
                     .into(imageView)
         }
@@ -66,7 +67,7 @@ class ImageLoadUtil {
         fun displayListImage(imageView: ImageView,url:String,type:Int){
             Glide.with(imageView.context)
                     .load(url)
-                    .crossFade(500)
+                    .transition(withCrossFade(500))
                     .placeholder(getDefaultPic(type))
                     .error(getDefaultPic(type))
                     .into(imageView)
@@ -77,8 +78,8 @@ class ImageLoadUtil {
          */
         fun displayGif(imageView: ImageView,url: String) {
             Glide.with(imageView.context)
-                    .load(url)
                     .asBitmap()
+                    .load(url)
                     .placeholder(R.drawable.shape_bg_loading)
                     .error(R.drawable.shape_bg_loading)
                     .into(imageView)
@@ -93,8 +94,8 @@ class ImageLoadUtil {
                     .load(url)
                     .error(R.drawable.stackblur_default)
                     .placeholder(R.drawable.stackblur_default)
-                    .crossFade(500)
-                    .bitmapTransform(BlurTransformation(imageView.context,23,4))
+                    .transition(withCrossFade(500))
+                    .transform(BlurTransformation(imageView.context,23,4))
                     .into(imageView)
         }
 

@@ -73,7 +73,7 @@ class FilmComingFragment : BaseFragment() {
     }
 
     private fun loadComingData() {
-        viewModel.getComingFilm().observe(this, Observer {
+        viewModel.getComingFilm().observe(viewLifecycleOwner, Observer {
             when (it.state) {
                 Resource.LOADING -> {
                 }
@@ -107,6 +107,6 @@ class FilmComingFragment : BaseFragment() {
     }
 
     companion object {
-        fun getInstance(type: String) = FilmComingFragment()
+        fun getInstance() = FilmComingFragment()
     }
 }
