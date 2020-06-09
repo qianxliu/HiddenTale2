@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="MyThemeRed"/>
+    <style name="AppTheme" parent="MyThemeRed" />
 
     <!-- 网易红为主色调 -->
     <style name="MyThemeRed" parent="Theme.AppCompat.Light.NoActionBar">

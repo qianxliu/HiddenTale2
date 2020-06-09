@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.yanze.cloudreaderkotlin.widget.MyNestedScrollView
+    <com.qianxin.hiddentale.widget.MyNestedScrollView
         android:id="@+id/mns_base"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -46,7 +46,7 @@
             </RelativeLayout>
 
         </LinearLayout>
-    </com.yanze.cloudreaderkotlin.widget.MyNestedScrollView>
+    </com.qianxin.hiddentale.widget.MyNestedScrollView>
 
     <!--标题-->
     <RelativeLayout

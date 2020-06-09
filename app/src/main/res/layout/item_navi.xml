@@ -8,4 +8,4 @@
     android:padding="8dp"
     android:textColor="@color/select_navi_text"
     android:textSize="14sp"
-    tools:text="常用网站"/>
+    tools:text="常用网站" />

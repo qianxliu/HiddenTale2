@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.qianxin.hiddentale.R;
+
 public class LoadingMoreFooter extends LinearLayout {
 
     public final static int STATE_LOADING = 0;
@@ -24,7 +26,7 @@ public class LoadingMoreFooter extends LinearLayout {
         initView(context);
     }
 
-    /**
+    /*
      * @param context
      * @param attrs
      */
@@ -35,8 +37,8 @@ public class LoadingMoreFooter extends LinearLayout {
 
     public void initView(Context context) {
         LayoutInflater.from(context).inflate(R.layout.yun_refresh_footer, this);
-        mText = (TextView) findViewById(R.id.msg);
-        mIvProgress = (ImageView) findViewById(R.id.iv_progress);
+        mText = findViewById(R.id.msg);
+        mIvProgress = findViewById(R.id.iv_progress);
         mAnimationDrawable = (AnimationDrawable) mIvProgress.getDrawable();
         if (!mAnimationDrawable.isRunning()) {
             mAnimationDrawable.start();

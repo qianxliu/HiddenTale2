@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-/**
+/*
  * Created by yangcai on 2016/1/28.
  */
 public class WrapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

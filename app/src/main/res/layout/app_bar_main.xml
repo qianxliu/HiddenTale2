@@ -7,28 +7,28 @@
     android:orientation="vertical">
 
     <!--<View-->
-        <!--android:id="@+id/view_status"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="24dp"-->
-        <!--android:background="@color/colorTheme"-->
-        <!--android:visibility="gone" />-->
+    <!--android:id="@+id/view_status"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="24dp"-->
+    <!--android:background="@color/colorTheme"-->
+    <!--android:visibility="gone" />-->
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorTheme"
+        android:theme="@style/ToolbarStyle"
         app:contentInsetStart="0.0dp"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        android:theme="@style/ToolbarStyle">
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
         <FrameLayout
             android:id="@+id/ll_title_menu"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
 
             <ImageView
                 android:id="@+id/iv_title_menu"

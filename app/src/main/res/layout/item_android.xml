@@ -17,7 +17,7 @@
         android:orientation="vertical"
         android:paddingTop="12dp">
 
-        <!--全部标签时显示福利图-->
+        <!--全部标签时显示宝图图-->
         <ImageView
             android:id="@+id/iv_all_welfare"
             android:layout_width="match_parent"
@@ -82,7 +82,7 @@
                 android:textColor="@color/colorSubtitle"
                 android:textSize="12sp"
                 android:visibility="gone"
-                tools:text="类型"/>
+                tools:text="类型" />
 
             <TextView
                 android:id="@+id/tv_android_time"

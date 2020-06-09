@@ -12,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-/**
+import com.qianxin.hiddentale.R;
+
+/*
  * Created by yangcai on 2016/1/27.
  */
 public class YunRefreshHeader extends LinearLayout implements BaseRefreshHeader {
@@ -39,17 +41,17 @@ public class YunRefreshHeader extends LinearLayout implements BaseRefreshHeader 
 
     private void initView() {
         LayoutInflater.from(mContext).inflate(R.layout.kaws_refresh_header, this);
-        ImageView img = (ImageView) findViewById(R.id.img);
+        ImageView img = findViewById(R.id.img);
 
         animationDrawable = (AnimationDrawable) img.getDrawable();
         if (animationDrawable.isRunning()) {
             animationDrawable.stop();
         }
-        msg = (TextView) findViewById(R.id.msg);
+        msg = findViewById(R.id.msg);
         measure(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         mMeasuredHeight = getMeasuredHeight();
         setGravity(Gravity.CENTER_HORIZONTAL);
-        mContainer = (LinearLayout) findViewById(R.id.container);
+        mContainer = findViewById(R.id.container);
         mContainer.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 0));
         this.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
     }
@@ -79,12 +81,10 @@ public class YunRefreshHeader extends LinearLayout implements BaseRefreshHeader 
                 msg.setText(R.string.listview_header_hint_normal);
                 break;
             case STATE_RELEASE_TO_REFRESH:
-                if (mState != STATE_RELEASE_TO_REFRESH) {
-                    if (!animationDrawable.isRunning()) {
-                        animationDrawable.start();
-                    }
-                    msg.setText(R.string.listview_header_hint_release);
+                if (!animationDrawable.isRunning()) {
+                    animationDrawable.start();
                 }
+                msg.setText(R.string.listview_header_hint_release);
                 break;
             case STATE_REFRESHING:
                 msg.setText(R.string.refreshing);
@@ -101,17 +101,14 @@ public class YunRefreshHeader extends LinearLayout implements BaseRefreshHeader 
     public boolean releaseAction() {
         boolean isOnRefresh = false;
         int height = getVisiableHeight();
-        if (height == 0) // not visible.
-            isOnRefresh = false;
+        // not visible.
 
         if (getVisiableHeight() > mMeasuredHeight && mState < STATE_REFRESHING) {
             setState(STATE_REFRESHING);
             isOnRefresh = true;
         }
         // refreshing and header isn't shown fully. do nothing.
-        if (mState == STATE_REFRESHING && height <= mMeasuredHeight) {
-            //return;
-        }
+        //return;
         int destHeight = 0; // default: scroll back to dismiss header.
         // is refreshing, just scroll back to show all the header.
         if (mState == STATE_REFRESHING) {
@@ -125,11 +122,7 @@ public class YunRefreshHeader extends LinearLayout implements BaseRefreshHeader 
     @Override
     public void refreshComplate() {
         setState(STATE_DONE);
-        new Handler().postDelayed(new Runnable() {
-            public void run() {
-                reset();
-            }
-        }, 500);
+        new Handler().postDelayed(this::reset, 500);
     }
 
     public void reset() {
@@ -140,12 +133,7 @@ public class YunRefreshHeader extends LinearLayout implements BaseRefreshHeader 
     private void smoothScrollTo(int destHeight) {
         ValueAnimator animator = ValueAnimator.ofInt(getVisiableHeight(), destHeight);
         animator.setDuration(300).start();
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                setVisiableHeight((int) animation.getAnimatedValue());
-            }
-        });
+        animator.addUpdateListener(animation -> setVisiableHeight((int) animation.getAnimatedValue()));
         animator.start();
     }
 

@@ -24,10 +24,10 @@
                 android:background="#4000"
                 android:gravity="bottom"
                 android:orientation="vertical"
-                android:paddingBottom="@dimen/activity_vertical_margin"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_vertical_margin">
+                android:paddingBottom="@dimen/activity_vertical_margin">
 
                 <ImageView
                     android:id="@+id/iv_avatar"
@@ -45,7 +45,7 @@
                         android:id="@+id/tv_username"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="只有近黄昏"
+                        android:text="长安"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textColor="@color/colorWhite"
                         android:textSize="17sp" />
@@ -58,10 +58,10 @@
                         android:layout_marginLeft="6dp"
                         android:background="@drawable/shape_bg_level"
                         android:gravity="center"
-                        android:paddingBottom="1dp"
                         android:paddingLeft="6dp"
-                        android:paddingRight="6dp"
                         android:paddingTop="1dp"
+                        android:paddingRight="6dp"
+                        android:paddingBottom="1dp"
                         android:text="Lv.10"
                         android:textColor="@color/colorWhite"
                         android:textSize="10sp"
@@ -234,7 +234,6 @@
                 android:textSize="15sp" />
 
         </LinearLayout>
-
 
 
     </LinearLayout>

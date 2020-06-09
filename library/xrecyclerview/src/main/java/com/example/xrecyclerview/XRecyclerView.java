@@ -15,14 +15,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-/**
- * Created by jingbin on 2016/1/28.
+import java.util.Objects;
+
+/*
+
  */
 public class XRecyclerView extends RecyclerView {
     private LoadingListener mLoadingListener;
     private WrapAdapter mWrapAdapter;
-    private SparseArray<View> mHeaderViews = new SparseArray<View>();
-    private SparseArray<View> mFootViews = new SparseArray<View>();
+    private SparseArray<View> mHeaderViews = new SparseArray<>();
+    private SparseArray<View> mFootViews = new SparseArray<>();
     private boolean pullRefreshEnabled = true;
     private boolean loadingMoreEnabled = true;
     private YunRefreshHeader mRefreshHeader;
@@ -58,7 +60,7 @@ public class XRecyclerView extends RecyclerView {
         mFootViews.get(0).setVisibility(GONE);
     }
 
-    /**
+    /*
      * 改为公有。供外添加view使用,使用标识
      * 注意：使用后不能使用 上拉加载，否则添加无效
      * 使用时 isOther 传入 true，然后调用 noMoreLoading即可。
@@ -69,7 +71,7 @@ public class XRecyclerView extends RecyclerView {
         this.isOther = isOther;
     }
 
-    /**
+    /*
      * 相当于加一个空白头布局：
      * 只有一个目的：为了滚动条显示在最顶端
      * 因为默认加了刷新头布局，不处理滚动条会下移。
@@ -96,7 +98,7 @@ public class XRecyclerView extends RecyclerView {
     private void loadMoreComplete() {
         isLoadingData = false;
         View footView = mFootViews.get(0);
-        if (previousTotal <= getLayoutManager().getItemCount()) {
+        if (previousTotal <= Objects.requireNonNull(getLayoutManager()).getItemCount()) {
             if (footView instanceof LoadingMoreFooter) {
                 ((LoadingMoreFooter) footView).setState(LoadingMoreFooter.STATE_COMPLETE);
             } else {
@@ -158,6 +160,7 @@ public class XRecyclerView extends RecyclerView {
                 ((StaggeredGridLayoutManager) layoutManager).findLastVisibleItemPositions(into);
                 lastVisibleItemPosition = findMax(into);
             } else {
+                assert layoutManager != null;
                 lastVisibleItemPosition = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
             }
             if (layoutManager.getChildCount() > 0
@@ -178,12 +181,7 @@ public class XRecyclerView extends RecyclerView {
                 if (isNetWorkConnected(getContext())) {
                     mLoadingListener.onLoadMore();
                 } else {
-                    postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            mLoadingListener.onLoadMore();
-                        }
-                    }, 1000);
+                    postDelayed(() -> mLoadingListener.onLoadMore(), 1000);
                 }
             }
         }
@@ -256,11 +254,7 @@ public class XRecyclerView extends RecyclerView {
         }
 
         View view = mHeaderViews.get(0);
-        if (view.getParent() != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return view.getParent() != null;
     }
 
     private final RecyclerView.AdapterDataObserver mDataObserver = new RecyclerView.AdapterDataObserver() {
@@ -324,7 +318,7 @@ public class XRecyclerView extends RecyclerView {
             return;
         }
         View footView = mFootViews.get(0);
-        if (footView != null && footView instanceof LoadingMoreFooter) {
+        if (footView instanceof LoadingMoreFooter) {
             mFootViews.remove(0);
         }
     }
@@ -336,7 +330,7 @@ public class XRecyclerView extends RecyclerView {
         void onLoadMore();
     }
 
-    /**
+    /*
      * 检测网络是否可用
      *
      * @param context
@@ -362,7 +356,7 @@ public class XRecyclerView extends RecyclerView {
         }
     }
 
-    /**
+    /*
      * 是否在刷新数据
      */
     public boolean isLoadingData() {

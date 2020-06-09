@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".view.viewbigimage.ViewBigImageActivity">
 
-    <com.yanze.cloudreaderkotlin.view.viewbigimage.HackyViewPager
+    <com.qianxin.hiddentale.view.viewbigimage.HackyViewPager
         android:id="@+id/very_image_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

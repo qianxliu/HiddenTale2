@@ -1,6 +1,6 @@
 package com.example.xrecyclerview;
 
-/**
+/*
  * Created by jianghejie on 15/11/22.
  */
 interface BaseRefreshHeader {

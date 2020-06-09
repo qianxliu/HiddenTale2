@@ -1,33 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.yanze.cloudreaderkotlin">
+    package="com.qianxin.hiddentale">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission_group.LOCATION" />
+    <uses-permission android:name="android.permission_group.CAMERA" />
+    <uses-permission android:name="android.permission_group.STORAGE" />
+    <uses-permission android:name="android.permission_group.PHONE" />
+    <uses-permission android:name="android.permission_group.SENSORS" />
+    <uses-permission android:name="android.permission_group.ACTIVITY_RECOGNITION" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
         android:name=".App"
         android:allowBackup="false"
-        android:icon="@drawable/ic_cloudreader"
+        android:icon="@drawable/ic_hiddentale"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:allowBackup">
-        <activity android:name=".ui.mtime.FilmDetailActivity"></activity>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTask"
             android:theme="@style/MyScrollPage" />
-        <activity
-            android:name=".ui.movie.MovieDetailActivity"
-            android:theme="@style/MyScrollPage" />
-        <activity android:name=".ui.movie.MovieTopActivity" />
         <activity
             android:name=".view.webview.WebViewActivity"
             android:configChanges="orientation|screenSize"
@@ -69,6 +77,18 @@
         <activity
             android:name=".ui.navi_menu.AboutActivity"
             android:screenOrientation="portrait" />
+
+
+        <service android:name="com.amap.api.location.APSService" />
+
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="4fe7a4a893e68a33825bbf8caa70ae49" />
+
+
+        <activity android:name="com.amap.api.navi.AmapRouteActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
     </application>
 
 </manifest>
