@@ -72,8 +72,13 @@ object RxSaveImage {
         context.showToast("开始下载图片")
         saveImageAndPathObservable(context, imageUrl, imageTitle)
                 .subscribe({
-                    val appDir = File(Environment.getExternalStorageDirectory(), "云阅相册")
-                    context.showToast("已保存至${appDir.absolutePath}")
+                    val appDir : File
+                    try {
+                        appDir = File(context.getExternalFilesDir(null), "云阅相册")
+                        context.showToast("已保存至${appDir.absolutePath}")
+                    }catch (e : Exception){
+                        e.printStackTrace()
+                    }
                 }, {
                     context.showToast("${it.message}")
                 })
@@ -125,5 +130,4 @@ object RxSaveImage {
             return tageImg1.replace(".", "-")
         }
     }
-
 }

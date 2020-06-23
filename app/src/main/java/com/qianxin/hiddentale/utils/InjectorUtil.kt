@@ -1,11 +1,11 @@
 package com.qianxin.hiddentale.utils
 
 import android.content.Context
-import com.qianxin.hiddentale.network.HttpClient
 import com.qianxin.hiddentale.network.HttpClient.Companion.getInstance
 import com.qianxin.hiddentale.network.cache.ACache
-import com.qianxin.hiddentale.repository.*
-import com.qianxin.hiddentale.repository.GankRepository.Companion.getInstance
+import com.qianxin.hiddentale.repository.GankRepository
+import com.qianxin.hiddentale.repository.WanRepository
+import com.qianxin.hiddentale.repository.WelfareRepository
 import com.qianxin.hiddentale.ui.gank.android.GankViewModelFactory
 import com.qianxin.hiddentale.ui.gank.customer.CsutomViewModelFactory
 import com.qianxin.hiddentale.ui.gank.welfare.WelfareViewModelFactory

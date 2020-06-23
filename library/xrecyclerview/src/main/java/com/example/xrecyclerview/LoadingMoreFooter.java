@@ -10,7 +10,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.qianxin.hiddentale.R;
+import com.qianxin.xrecyclerview.R;
+
 
 public class LoadingMoreFooter extends LinearLayout {
 

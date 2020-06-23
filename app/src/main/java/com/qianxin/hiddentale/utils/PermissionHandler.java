@@ -12,8 +12,6 @@ import com.baize.fireeyekotlin.utils.log.L;
 import java.util.ArrayList;
 
 /*
- * @author jingbin
- * @data 2018/7/18
  * @Description 权限处理
  * // 存储权限
  * Manifest.permission.WRITE_EXTERNAL_STORAGE

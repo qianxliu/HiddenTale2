@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 /*
- * Created by yangcai on 2016/1/28.
+ *
  */
 public class WrapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_REFRESH_HEADER = -5;
@@ -50,8 +50,7 @@ public class WrapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
         super.onViewAttachedToWindow(holder);
         ViewGroup.LayoutParams lp = holder.itemView.getLayoutParams();
-        if (lp != null
-                && lp instanceof StaggeredGridLayoutManager.LayoutParams
+        if (lp instanceof StaggeredGridLayoutManager.LayoutParams
                 && (isHeader(holder.getLayoutPosition()) || isFooter(holder.getLayoutPosition()))) {
             StaggeredGridLayoutManager.LayoutParams p = (StaggeredGridLayoutManager.LayoutParams) lp;
             p.setFullSpan(true);
@@ -101,7 +100,6 @@ public class WrapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             adapterCount = adapter.getItemCount();
             if (adjPosition < adapterCount) {
                 adapter.onBindViewHolder(holder, adjPosition);
-                return;
             }
         }
     }
@@ -163,7 +161,7 @@ public class WrapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    private class SimpleViewHolder extends RecyclerView.ViewHolder {
+    private static class SimpleViewHolder extends RecyclerView.ViewHolder {
         public SimpleViewHolder(View itemView) {
             super(itemView);
         }

@@ -11,7 +11,7 @@ import java.util.*
  * 1.普通，主页使用(不传MtitleList)
  * 2.接收首页传递的标题(传mTItleList)
  */
-class MyFragmentPageAdapter(fm: FragmentManager, var mFragment: List<Fragment>, var mTitleList: List<String> = ArrayList()) : FragmentStatePagerAdapter(fm) {
+class MyFragmentPageAdapter(fm: FragmentManager, private var mFragment: List<Fragment>, var mTitleList: List<String> = ArrayList()) : FragmentStatePagerAdapter(fm) {
 
     override fun getItem(position: Int) = mFragment[position]
 

@@ -5,11 +5,12 @@ apply plugin: 'kotlin-android-extensions'
 
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     buildToolsVersion '30.0.0 rc4'
+
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -28,16 +29,25 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-}
-repositories {
-    flatDir {
-        dirs 'libs'
+    /*
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
     }
+
+     */
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+    implementation 'com.github.barteksc:android-pdf-viewer:3.2.0-beta.1'
+    implementation fileTree(dir: 'libs', include: ['*.aar', '*.jar'])
+    //没有不可输入drawable
     implementation project(path: ':library:xrecyclerview')
+
+    implementation 'com.amap.api:location:5.0.0'
+    implementation 'com.amap.api:search:7.3.0'
+    implementation 'com.amap.api:navi-3dmap:7.4.0_3dmap7.4.0'
 
     // Support libraries
     implementation "com.google.android.material:material:1.1.0"

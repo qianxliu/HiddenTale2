@@ -1,7 +1,9 @@
 package com.qianxin.hiddentale
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.Menu
@@ -22,6 +24,7 @@ import com.qianxin.hiddentale.ui.navi_menu.ScanDownActivity
 import com.qianxin.hiddentale.ui.search.SearchActivity
 import com.qianxin.hiddentale.ui.wan.WanFragment
 import com.qianxin.hiddentale.utils.*
+import com.qianxin.hiddentale.utils.PermissionHandler.isHandlePermission
 import com.qianxin.hiddentale.utils.statusbar.StatusBarUtil
 import com.qianxin.hiddentale.view.webview.WebViewActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -34,6 +37,58 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, ViewPager.OnPage
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val permissions: Array<String> = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                arrayOf(
+                        Manifest.permission.ACCESS_NOTIFICATION_POLICY,
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.ACCESS_NETWORK_STATE,
+                        Manifest.permission.ACCESS_BACKGROUND_LOCATION,
+                        Manifest.permission.SYSTEM_ALERT_WINDOW,
+                        Manifest.permission.WAKE_LOCK,
+                        Manifest.permission.INTERNET,
+                        Manifest.permission.READ_PHONE_STATE,
+                        Manifest.permission.CHANGE_WIFI_STATE,
+                        Manifest.permission.ACCESS_WIFI_STATE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
+            } else {
+                arrayOf(
+                        Manifest.permission.ACCESS_NOTIFICATION_POLICY,
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.ACCESS_NETWORK_STATE,
+                        Manifest.permission.SYSTEM_ALERT_WINDOW,
+                        Manifest.permission.WAKE_LOCK,
+                        Manifest.permission.INTERNET,
+                        Manifest.permission.READ_PHONE_STATE,
+                        Manifest.permission.CHANGE_WIFI_STATE,
+                        Manifest.permission.ACCESS_WIFI_STATE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
+            }
+        } else {
+            arrayOf(
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.ACCESS_NETWORK_STATE,
+                    Manifest.permission.SYSTEM_ALERT_WINDOW,
+                    Manifest.permission.WAKE_LOCK,
+                    Manifest.permission.INTERNET,
+                    Manifest.permission.READ_PHONE_STATE,
+                    Manifest.permission.CHANGE_WIFI_STATE,
+                    Manifest.permission.ACCESS_WIFI_STATE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
+        }
+
+        permissions.forEach {
+            isHandlePermission(this, it)
+        }
+
+
         isLaunch = true
 //        initStatusView()
         StatusBarUtil.setColorNoTranslucentForDrawerLayout(this@MainActivity, drawer_layout,
@@ -50,9 +105,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, ViewPager.OnPage
 
     private fun initContentFragment() {
         val mFragmentList: ArrayList<Fragment> = ArrayList()
+        mFragmentList.add(MapFragment.getInstance())
         mFragmentList.add(WanFragment.getInstance())
         mFragmentList.add(GankFragment.getInstance())
-        mFragmentList.add(MapFragment.getInstance())
+
 
         val adapter = MyFragmentPageAdapter(supportFragmentManager, mFragmentList)
         vp_content.adapter = adapter
@@ -187,8 +243,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, ViewPager.OnPage
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        return when (item?.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
             R.id.action_search -> {
 //                this@MainActivity.showToast("搜索")
                 SearchActivity.newInstance(this@MainActivity)

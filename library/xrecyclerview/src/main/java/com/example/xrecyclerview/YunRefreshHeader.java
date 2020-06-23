@@ -11,8 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.qianxin.hiddentale.R;
+import com.qianxin.xrecyclerview.R;
 
 /*
  * Created by yangcai on 2016/1/27.

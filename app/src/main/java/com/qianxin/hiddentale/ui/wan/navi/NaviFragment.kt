@@ -140,8 +140,8 @@ class NaviFragment : BaseFragment() {
         loadNaviJsonData()
     }
 
+    //单例模式
     companion object {
         fun getInstance() = NaviFragment()
     }
-
 }

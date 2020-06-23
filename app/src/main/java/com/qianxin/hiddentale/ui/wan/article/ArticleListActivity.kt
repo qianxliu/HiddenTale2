@@ -63,7 +63,7 @@ class ArticleListActivity : BaseActivity() {
     private fun getInstantData() {
         val cid = intent.getIntExtra("cid", 0)
         val chapterName = intent.getStringExtra("chapterName")
-        setTitle(chapterName)
+        setTitle(chapterName.toString())
         adapter.setNoShowChapterName()
         viewModel.setCid(cid)
     }

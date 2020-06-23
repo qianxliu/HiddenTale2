@@ -6,7 +6,6 @@ import com.google.android.material.tabs.TabLayout
 import com.qianxin.hiddentale.R
 import com.qianxin.hiddentale.adapter.MyFragmentPageAdapter
 import com.qianxin.hiddentale.base.BaseFragment
-import com.qianxin.hiddentale.ui.gank.android.AndroidFragment
 import com.qianxin.hiddentale.ui.gank.customer.CsutomerFragment
 import com.qianxin.hiddentale.ui.gank.welfare.WelfareFragment
 import kotlinx.android.synthetic.main.fragment_gank.view.*
@@ -51,11 +50,9 @@ class GankFragment : BaseFragment() {
 //        mTitleList.add("每日推荐")
         mTitleList.add("宝图")
         mTitleList.add("干货订制")
-        mTitleList.add("大安卓")
 //        mFragments.add(TextFragment())
         mFragments.add(WelfareFragment.getInstance())
         mFragments.add(CsutomerFragment.getInstance())
-        mFragments.add(AndroidFragment.getInstance())
 //        mTitleList = arrayListOf("每日推荐", "宝图", "干货定制", "大安卓")
 //        mFragments = arrayListOf(TextFragment(), TextFragment(), TextFragment(), TextFragment())
     }

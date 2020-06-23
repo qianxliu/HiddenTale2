@@ -47,8 +47,8 @@ class WebViewActivity : AppCompatActivity(), IWebPageView {
 
     private fun getIntentData() {
         if (intent != null) {
-            mTitle = intent.getStringExtra("mTitle")
-            mUrl = intent.getStringExtra("mUrl")
+            mTitle = intent.getStringExtra("mTitle").toString()
+            mUrl = intent.getStringExtra("mUrl").toString()
         }
     }
 
@@ -71,8 +71,8 @@ class WebViewActivity : AppCompatActivity(), IWebPageView {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
             android.R.id.home -> handleFinish()  //返回键
             R.id.actionbar_share -> {
                 showToast("分享")

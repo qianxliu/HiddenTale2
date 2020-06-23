@@ -8,7 +8,6 @@ import com.qianxin.hiddentale.adapter.MyFragmentPageAdapter
 import com.qianxin.hiddentale.base.BaseFragment
 import com.qianxin.hiddentale.ui.wan.home.BannerFragment
 import com.qianxin.hiddentale.ui.wan.navi.NaviFragment
-import com.qianxin.hiddentale.ui.wan.tree.TreeFragment
 import kotlinx.android.synthetic.main.fragment_wan.view.*
 
 class WanFragment : BaseFragment() {
@@ -42,8 +41,8 @@ class WanFragment : BaseFragment() {
     }
 
     private fun initFragmentList() {
-        mTitleList = arrayListOf("玩安卓", "知识体系", "导航数据")
-        mFragments = arrayListOf(BannerFragment.getInstance(), TreeFragment.getInstance(), NaviFragment.getInstance())
+        mTitleList = arrayListOf("玩安卓", "导航数据")
+        mFragments = arrayListOf(BannerFragment.getInstance(), NaviFragment.getInstance())
     }
 
     companion object {

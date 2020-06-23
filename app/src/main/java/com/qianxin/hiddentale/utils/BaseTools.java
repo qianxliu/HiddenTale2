@@ -1,5 +1,6 @@
 package com.qianxin.hiddentale.utils;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.ClipboardManager;
@@ -24,6 +25,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 /*
  * Created by jingbin on 2017/2/13.
@@ -45,8 +47,7 @@ public class BaseTools {
                 .getSystemService(Context.WINDOW_SERVICE));
         DisplayMetrics dm = new DisplayMetrics();
         wm.getDefaultDisplay().getMetrics(dm);
-        int mScreenWidth = dm.widthPixels;
-        return mScreenWidth;
+        return dm.widthPixels;
     }
 
     public static int getWindowHeigh(Context context) {
@@ -55,21 +56,21 @@ public class BaseTools {
                 .getSystemService(Context.WINDOW_SERVICE));
         DisplayMetrics dm = new DisplayMetrics();
         wm.getDefaultDisplay().getMetrics(dm);
-        int mScreenHeigh = dm.heightPixels;
-        return mScreenHeigh;
+        return dm.heightPixels;
     }
 
     //获得状态栏/通知栏的高度
+    @SuppressLint("PrivateApi")
     public static int getStatusBarHeight(Context context) {
-        Class<?> c = null;
-        Object obj = null;
-        Field field = null;
-        int x = 0, statusBarHeight = 0;
+        Class<?> c;
+        Object obj;
+        Field field;
+        int x, statusBarHeight = 0;
         try {
             c = Class.forName("com.android.internal.R$dimen");
             obj = c.newInstance();
             field = c.getField("status_bar_height");
-            x = Integer.parseInt(field.get(obj).toString());
+            x = Integer.parseInt(Objects.requireNonNull(field.get(obj)).toString());
             statusBarHeight = context.getResources().getDimensionPixelSize(x);
         } catch (Exception e1) {
             e1.printStackTrace();
@@ -85,7 +86,7 @@ public class BaseTools {
      * @return String
      */
     public static String formatCurrency(double d) {
-        String s = "";
+        String s;
         try {
             DecimalFormat nf = (DecimalFormat) NumberFormat.getCurrencyInstance(Locale.CHINA);
             s = nf.format(d);
@@ -128,7 +129,7 @@ public class BaseTools {
         // 获取packagemanager的实例
         PackageManager packageManager = App.instrance.getPackageManager();
         // getPackageName()是你当前类的包名，0代表是获取版本信息
-        PackageInfo packInfo = null;
+        PackageInfo packInfo;
         try {
             packInfo = packageManager.getPackageInfo(App.instrance.getPackageName(), 0);
             return packInfo.versionName;
@@ -157,7 +158,7 @@ public class BaseTools {
     public static String getClipContent() {
         ClipboardManager manager = (ClipboardManager) App.instrance.getSystemService(Context.CLIPBOARD_SERVICE);
         if (manager != null) {
-            if (manager.hasPrimaryClip() && manager.getPrimaryClip().getItemCount() > 0) {
+            if (manager.hasPrimaryClip() && Objects.requireNonNull(manager.getPrimaryClip()).getItemCount() > 0) {
                 CharSequence addedText = manager.getPrimaryClip().getItemAt(0).getText();
                 String addedTextString = String.valueOf(addedText);
                 if (!TextUtils.isEmpty(addedTextString)) {
@@ -179,7 +180,7 @@ public class BaseTools {
                 manager.setPrimaryClip(null);
                 manager.setText(null);
             } catch (Exception e) {
-                L.e(TAG, e.getMessage());
+                L.e(TAG, Objects.requireNonNull(e.getMessage()));
             }
         }
     }
@@ -206,12 +207,10 @@ public class BaseTools {
             PackageManager packageManager = context.getPackageManager();
             // 获取所有已安装程序的包信息
             List<PackageInfo> pinfo = packageManager.getInstalledPackages(0);
-            if (pinfo != null) {
-                for (int i = 0; i < pinfo.size(); i++) {
-                    String pn = pinfo.get(i).packageName;
-                    if (appPackageName.equals(pn)) {
-                        return true;
-                    }
+            for (int i = 0; i < pinfo.size(); i++) {
+                String pn = pinfo.get(i).packageName;
+                if (appPackageName.equals(pn)) {
+                    return true;
                 }
             }
             return false;
@@ -230,7 +229,7 @@ public class BaseTools {
         final View v = activity.getWindow().peekDecorView();
         if (v != null && v.getWindowToken() != null) {
             try {
-                ((InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(activity.getCurrentFocus()
+                ((InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(Objects.requireNonNull(activity.getCurrentFocus())
                         .getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             } catch (Exception e) {
                 Log.w("TAG", e.toString());
