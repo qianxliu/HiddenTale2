@@ -115,7 +115,7 @@ class CsutomerFragment : BaseFragment(), View.OnClickListener {
     private fun isOtherType(selectType: String): Boolean {
         val click = SPUtils.getString(GANK_CALA, "全部")
         return if (click == selectType) {
-            context?.showToast("当前已是$selectType" + "分类")
+            showToast("当前已是$selectType" + "分类")
             false
         } else {
             true
@@ -169,7 +169,7 @@ class CsutomerFragment : BaseFragment(), View.OnClickListener {
                     } else {
                         childView.xrv_custom.noMoreLoading()
                     }
-                    context?.showToast(msg = "${it.message}")
+                    showToast(msg = "${it.message}")
                 }
             }
         })

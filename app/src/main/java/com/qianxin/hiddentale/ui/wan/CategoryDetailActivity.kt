@@ -36,7 +36,7 @@ class CategoryDetailActivity : AppCompatActivity() {
         val mFragments = ArrayList<Fragment>()
 
         var initIndex = 0
-        for (i in 0 until treeBean.children.size) {
+        for (i in treeBean.children.indices) {
             val children = treeBean.children[i]
             if (children.id == cid) {
                 initIndex = i
@@ -58,7 +58,7 @@ class CategoryDetailActivity : AppCompatActivity() {
 
     private fun updateUi(treeBean: TreeBean) {
         ImageLoadUtil.displayGaussFuzzy(blur, Constants.CATEGORY_DETAIL_IMG)
-        tv_category_num.text = "${String.format(getString(R.string.string_tree_category_size), treeBean.children.size)}"
+        tv_category_num.text = String.format(getString(R.string.string_tree_category_size), treeBean.children.size)
         toolbar.title = treeBean.name
     }
 

@@ -7,13 +7,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.qianxin.hiddentale.App;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
+
+import static com.qianxin.hiddentale.utils.ExtensionKt.showToast;
 
 /*
  * Created by jingbin on 2016/11/22.
@@ -81,4 +91,52 @@ public class CommonUtils {
         return dateFm.format(date);
     }
 
+    /*
+     * 下载工具类
+
+     */
+    public static File downloadFile(File file, String httpUrl) {
+        try {
+            if (httpUrl.endsWith("/")) {
+                httpUrl = httpUrl.substring(0, httpUrl.length() - 1);
+            }
+            URL url = new URL(httpUrl);
+            try {
+                HttpURLConnection conn = (HttpURLConnection) url
+                        .openConnection();
+                InputStream is = conn.getInputStream();
+                FileOutputStream fos = new FileOutputStream(file);
+                byte[] buf = new byte[256];
+                conn.connect();
+                if (conn.getResponseCode() >= 400) {
+                    showToast( "连接超时");
+                } else {
+                    while (true) {
+                        if (is != null) {
+                            int numRead = is.read(buf);
+                            if (numRead <= 0) {
+                                break;
+                            } else {
+                                fos.write(buf, 0, numRead);
+                            }
+
+                        } else {
+                            break;
+                        }
+
+                    }
+                }
+                conn.disconnect();
+                fos.close();
+                assert is != null;
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        return file;
+    }
 }

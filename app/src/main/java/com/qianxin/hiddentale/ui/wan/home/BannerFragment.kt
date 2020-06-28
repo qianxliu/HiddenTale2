@@ -161,7 +161,7 @@ class BannerFragment : BaseFragment() {
                         childView.xrv_wan.refreshComplete()
                         childView.xrv_wan.noMoreLoading()
                     }
-                    context?.showToast("${it.message}")
+                    showToast("${it.message}")
                 }
             }
         })

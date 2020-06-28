@@ -308,7 +308,7 @@ class WebViewActivity : AppCompatActivity(), IWebPageView {
     }
 
     companion object {
-        fun loadUrl(context: Context, url: String?, title: String? = "云阅Kotlin") {
+        fun loadUrl(context: Context, url: String?, title: String? = "长安宝藏Kotlin") {
             if (CheckNetwork.isNetworkConnected(context)) {
                 val intent = Intent(context, WebViewActivity::class.java)
 //                intent.putExtra("mTitle", context.getString(R.string.app_name))
@@ -317,7 +317,7 @@ class WebViewActivity : AppCompatActivity(), IWebPageView {
                 intent.putExtra("mUrl", url ?: context.getString(R.string.my_blog))
                 context.startActivity(intent)
             } else {
-                context.showToast("当前网络不可用，请检查你的网络设置")
+                showToast("当前网络不可用，请检查你的网络设置")
             }
         }
     }

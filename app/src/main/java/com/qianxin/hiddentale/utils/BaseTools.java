@@ -38,7 +38,7 @@ public class BaseTools {
     //获取图片所在文件夹名称
     public static String getDir(String path) {
         String subString = path.substring(0, path.lastIndexOf('/'));
-        return subString.substring(subString.lastIndexOf('/') + 1, subString.length());
+        return subString.substring(subString.lastIndexOf('/') + 1);
     }
 
     public static int getWindowWidth(Context context) {
@@ -148,7 +148,9 @@ public class BaseTools {
         if (!TextUtils.isEmpty(content)) {
             // 得到剪贴板管理器
             ClipboardManager cmb = (ClipboardManager) App.instrance.getSystemService(Context.CLIPBOARD_SERVICE);
+
             cmb.setText(content.trim());
+
         }
     }
 
@@ -252,5 +254,6 @@ public class BaseTools {
         List var2 = am.getRunningTasks(1);
         return ((ActivityManager.RunningTaskInfo) var2.get(0)).topActivity.getClassName();
     }
+
 
 }

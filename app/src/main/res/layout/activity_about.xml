@@ -72,7 +72,7 @@
             android:id="@+id/tv_good_cloud"
             style="@style/menuItem"
             android:clickable="true"
-            android:text="原《云阅》下载" />
+            android:text="原《长安宝藏》下载" />
 
     </LinearLayout>
 
@@ -84,7 +84,7 @@
         android:lineSpacingExtra="2dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:text="本项目是在原《云阅》的基础上修改的，所用技术有些许不同。本项目仅供个人学习，也尊重JingBin大神的劳动成果，如有转载，请尊重原版权。今后我也会迭代出更多自己想实现的功能，O(∩_∩)O ~"
+        android:text="本项目是在原《长安宝藏》的基础上修改的，所用技术有些许不同。本项目仅供个人学习，也尊重JingBin大神的劳动成果，如有转载，请尊重原版权。今后我也会迭代出更多自己想实现的功能，O(∩_∩)O ~"
         android:textColor="@color/colorSubtitle"
         android:textSize="14sp" />
 

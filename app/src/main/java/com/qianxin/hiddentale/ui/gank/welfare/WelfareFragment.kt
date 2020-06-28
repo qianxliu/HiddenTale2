@@ -57,7 +57,7 @@ class WelfareFragment : BaseFragment() {
 
     private fun loadWelfareData() {
         if (viewModel.welfareResult.isEmpty() || adapter.itemCount == viewModel.welfareResult.size) { //去请求新数据
-            viewModel.getWelfareImage().observe(this, Observer { result ->
+            viewModel.getWelfareImage().observe(viewLifecycleOwner, Observer { result ->
                 when (result.state) {
                     Resource.LOADING -> {
                         if (viewModel.page == 1) {

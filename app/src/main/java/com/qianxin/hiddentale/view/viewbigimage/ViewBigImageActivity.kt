@@ -199,7 +199,7 @@ class ViewBigImageActivity : AppCompatActivity(), OnPhotoTapListener, ViewPager.
                         }
 
                         override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
-                            this@ViewBigImageActivity.showToast("资源加载异常")
+                            showToast("资源加载异常")
                             view.loading.visibility = View.GONE
                             return false
                         }

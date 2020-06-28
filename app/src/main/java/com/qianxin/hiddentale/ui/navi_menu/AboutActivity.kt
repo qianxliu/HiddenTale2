@@ -19,7 +19,7 @@ class AboutActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
-        setTitle("关于云阅")
+        setTitle("关于长安宝藏")
         showContentView()
         tv_version_name.text = "当前版本 V${BaseTools.getVersionName()}"
 
@@ -68,7 +68,7 @@ class AboutActivity : BaseActivity() {
                 }
                 R.id.tv_good_cloud -> {
                     url = getString(R.string.string_url_new_version)
-                    title = "云阅 - fir.im"
+                    title = "长安宝藏 - fir.im"
                 }
             }
             WebViewActivity.loadUrl(this@AboutActivity, url, title)

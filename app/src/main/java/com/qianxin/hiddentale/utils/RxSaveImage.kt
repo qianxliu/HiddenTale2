@@ -4,10 +4,13 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
-import android.os.Environment
 import com.baize.fireeyekotlin.utils.log.L
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.Target
+import com.github.barteksc.pdfviewer.PDFView
+import com.github.barteksc.pdfviewer.util.FitPolicy
+import com.qianxin.hiddentale.R
+import com.qianxin.hiddentale.utils.CommonUtils.downloadFile
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import io.reactivex.ObservableOnSubscribe
@@ -27,7 +30,7 @@ object RxSaveImage {
         return Observable.create(object : ObservableOnSubscribe<String> {
             override fun subscribe(emitter: ObservableEmitter<String>) {
                 //检查图片是否已存在
-                val appDir = File(Environment.getExternalStorageDirectory(), "云阅相册")
+                val appDir = File(context.getExternalFilesDir(null), "长安宝藏相册")
                 if (appDir.exists()) {
                     val file = File(appDir, getFileName(url, title))
                     if (file.exists()) {
@@ -42,7 +45,7 @@ object RxSaveImage {
 
                 try {
                     //下载
-                    var fileDo = Glide.with(context)
+                    val fileDo = Glide.with(context)
                             .load(url)
                             .downloadOnly(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
                             .get()
@@ -69,18 +72,18 @@ object RxSaveImage {
 
     @SuppressLint("CheckResult")
     fun saveImageToGallery(context: Activity, imageUrl: String, imageTitle: String) {
-        context.showToast("开始下载图片")
+        showToast("开始下载图片")
         saveImageAndPathObservable(context, imageUrl, imageTitle)
                 .subscribe({
-                    val appDir : File
+                    val appDir: File
                     try {
-                        appDir = File(context.getExternalFilesDir(null), "云阅相册")
-                        context.showToast("已保存至${appDir.absolutePath}")
-                    }catch (e : Exception){
+                        appDir = File(context.getExternalFilesDir(null), "长安宝藏相册")
+                        showToast("已保存至${appDir.absolutePath}")
+                    } catch (e: Exception) {
                         e.printStackTrace()
                     }
                 }, {
-                    context.showToast("${it.message}")
+                    showToast("${it.message}")
                 })
     }
 
@@ -129,5 +132,72 @@ object RxSaveImage {
             val tageImg1 = imageUrl.replace("http://", "")
             return tageImg1.replace(".", "-")
         }
+    }
+
+    //PDF
+    @SuppressLint("CheckResult")
+    fun savePdfToGallery(context: Activity, pdfUrl: String, pdfTitle: String) {
+        showToast("正在加载")
+        savePdfAndPathObservable(context, pdfUrl, pdfTitle)
+                .subscribe({
+                    try {
+                        showToast("加载完成!")
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }, {
+                    showToast("${it.message}")
+                })
+    }
+
+    @SuppressLint("CheckResult")
+    private fun savePdfAndPathObservable(context: Activity, url: String, title: String): Observable<String> {
+        return Observable.create(object : ObservableOnSubscribe<String> {
+            override fun subscribe(emitter: ObservableEmitter<String>) {
+                //检查图片是否已存在
+                val appDir = File(context.getExternalFilesDir(null), "Data")
+                val file = File(appDir, getFileName(url, title))
+                if (!appDir.exists()) {
+                    appDir.mkdir()
+                    if (!file.exists()) {
+                        downloadFile(file, url)
+                    }
+                }
+                try {
+                    //下载
+                    val pdfView: PDFView = context.findViewById(R.id.pdfView)
+                    pdfView.fromFile(file)
+                            .pageFitPolicy(FitPolicy.WIDTH)
+                            .enableSwipe(true) //pdf文档翻页是否是水平翻页，默认是左右滑动翻页
+                            .swipeHorizontal(false) //
+                            .enableDoubletap(true) //设置默认显示第0页
+                            .defaultPage(0) //允许在当前页面上绘制一些内容，通常在屏幕中间可见。
+                            //             .onDraw(onDrawListener)
+                            //                // 允许在每一页上单独绘制一个页面。只调用可见页面
+                            //                .onDrawAll(onDrawListener)
+                            //设置加载监听
+                            //设置页面滑动监听
+                            //                .onPageScroll(onPageScrollListener)
+                            //                .onError(onErrorListener)
+                            // 首次提交文档后调用。
+                            //                .onRender(onRenderListener)
+                            // 渲染风格（就像注释，颜色或表单）
+                            .enableAnnotationRendering(true)
+                            .password(null)
+                            .scrollHandle(null) // 改善低分辨率屏幕上的渲染
+                            .enableAntialiasing(true) // 页面间的间距。定义间距颜色，设置背景视图
+                            .spacing(0) // add dynamic spacing to fit each page on its own on the screen
+                            .autoSpacing(false) // mode to fit pages in the view
+                            .pageFitPolicy(FitPolicy.WIDTH) // fit each page to the view, else smaller pages are scaled relative to largest page.
+                            .fitEachPage(true)
+                            .load()
+                } catch (e: Exception) {
+                    emitter.onError(e)
+                }
+                emitter.onNext("")
+                emitter.onComplete()
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
     }
 }

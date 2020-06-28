@@ -184,7 +184,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, ViewPager.OnPage
                         IssueActivity.start(this@MainActivity)
                     }
                     R.id.ll_nav_about -> {
-//                        showToast("关于云阅")
+//                        showToast("关于长安宝藏")
                         AboutActivity.start(this@MainActivity)
                     }
                     R.id.ll_nav_collect -> {
@@ -233,7 +233,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, ViewPager.OnPage
     private fun getClipContent() {
         val clipContent = BaseTools.getClipContent()
         if (clipContent.isNotEmpty()) {
-            this@MainActivity.showToast(clipContent)
+            showToast(clipContent)
         }
     }
 
