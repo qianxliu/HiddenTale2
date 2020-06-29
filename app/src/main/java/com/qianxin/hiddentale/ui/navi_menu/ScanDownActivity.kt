@@ -18,7 +18,7 @@ class ScanDownActivity : BaseActivity() {
         showContentView()
 
         setTitle("扫码下载")
-        QRCodeUtil.showThreadImage(this@ScanDownActivity, Constants.DOWNLOAD_URL, iv_erweima, R.drawable.ic_hiddentale_mip)
+        QRCodeUtil.showThreadImage(this@ScanDownActivity, Constants.DOWNLOAD_URL, iv_erweima, R.drawable.ic_hiddentale)
         tv_share.setOnClickListener {
             ShareUtils.share(this@ScanDownActivity, R.string.string_share_text)
         }

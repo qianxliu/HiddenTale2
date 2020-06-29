@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.qianxin.hiddentale.App;
@@ -109,7 +108,7 @@ public class CommonUtils {
                 byte[] buf = new byte[256];
                 conn.connect();
                 if (conn.getResponseCode() >= 400) {
-                    showToast( "连接超时");
+                    showToast("连接超时");
                 } else {
                     while (true) {
                         if (is != null) {

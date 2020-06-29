@@ -1,22 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:largeHeap="true"
-    android:theme="@style/Theme.AppCompat.NoActionBar"
-    tools:context=".activity.PdfViewActivity">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:background="@drawable/texture3"
-        tools:ignore="ContentDescription" />
+    android:theme="@style/Theme.AppCompat.NoActionBar">
 
     <com.github.barteksc.pdfviewer.PDFView
         android:id="@+id/pdfView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/texture3" />
+        android:layout_marginTop="25dp" />
 </merge>

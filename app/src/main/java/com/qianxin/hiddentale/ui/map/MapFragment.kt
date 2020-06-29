@@ -1,6 +1,7 @@
 package com.qianxin.hiddentale.ui.map
 
 import android.content.Context
+import android.content.DialogInterface
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AlertDialog.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.amap.api.location.AMapLocation
@@ -130,7 +132,21 @@ open class MapFragment : Fragment(), LocationSource, AMapLocationListener, PoiSe
                 icon(marker, (Math.random() * 10 % 10).toInt())
                 caculate()
             } else if (marker.zIndex == -2f) {
-                AlertDialog(activity).setTitle("导航");
+                val builder = Builder(activity)
+                builder.setTitle("默认标题")//设置标题
+                        .setIcon(R.drawable.ic_hiddentale)//设置标题图片
+                        .setMessage("默认文本信息")//设置内容
+                        .setCancelable(false)//设置是否可以点击对话框以外的地方消失
+                        .setNegativeButton("取消", DialogInterface.OnClickListener { dialogInterface, i -> dialogInterface.dismiss(); }
+
+                        }).setPositiveButton("确定",(dialog,i) ->{
+                    dialog.dismiss();
+                });
+
+                AlertDialog alertDialog = builder.create();
+
+                alertDialog.show();
+
                 naviLatLng = NaviLatLng(marker.position.latitude, marker.position.longitude)
             }
             true
@@ -199,15 +215,6 @@ open class MapFragment : Fragment(), LocationSource, AMapLocationListener, PoiSe
             .target(XIAN).zoom(18f).bearing(0f).tilt(30f).build()
     var temp = 0f
     private var naviLatLng: NaviLatLng? = null
-    private val naviInfoCallback: INaviInfoCallback? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    open fun getTarget(): LatLng? {
-        return XIAN
-    }
 
     open fun getCameraPosition(): CameraPosition {
         return cameraPosition
@@ -215,6 +222,7 @@ open class MapFragment : Fragment(), LocationSource, AMapLocationListener, PoiSe
 
     open fun setCameraPosition(cameraPosition: CameraPosition) {
         MapFragment.cameraPosition = cameraPosition
+
     }
 
     private val latLng = arrayOf(
@@ -254,7 +262,7 @@ open class MapFragment : Fragment(), LocationSource, AMapLocationListener, PoiSe
             "西安市碑林区太白北路229号\n",
             "西安市碑林区咸宁西路28号\n")
 
-    private open fun icon(marker: Marker, len: Int) {
+    fun icon(marker: Marker, len: Int) {
         when ((Math.random() * len % len).toInt()) {
             0 -> marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.p1))
             1 -> marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.p2))
