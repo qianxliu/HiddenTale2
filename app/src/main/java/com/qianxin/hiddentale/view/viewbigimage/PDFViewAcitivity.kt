@@ -1,26 +1,13 @@
 package com.qianxin.hiddentale.view.viewbigimage
 
-import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.os.StrictMode
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.Target
 import com.github.barteksc.pdfviewer.PDFView
-import com.github.barteksc.pdfviewer.util.FitPolicy
 import com.qianxin.hiddentale.R
 import com.qianxin.hiddentale.utils.RxSaveImage
-import com.qianxin.hiddentale.utils.showToast
-import io.reactivex.Observable
-import io.reactivex.ObservableEmitter
-import io.reactivex.ObservableOnSubscribe
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import java.io.File
 
 class PdfViewActivity : AppCompatActivity() {
     private var uri: String? = null
